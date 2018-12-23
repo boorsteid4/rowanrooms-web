@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<!-- For text interpreters -->
+<html lang="en-US">
+
+<!-- stylesheet -->
+<link rel="stylesheet" type="text/css" href="../static/stylesheet.css"></link>
+
+<!-- 
+This is the HTML source for the Rowan IoT Room Project 
+written by Damon Boorstein (email: boorsteid4@students.rowan.edu) and Prof. Muhlbaier
+at Rowan University for the Fall 2018 Introduction to IoT course.
+-->
+
+<head>
+    <title>Rowan Rooms</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    // functions: update()
+    /*  update():   runs $.getJSON() which pulls room data from "/rooms" and appends a html div
+                    to the room-list list. "rooms" div is defined in stylesheet.css
+        clear():    empties room-list div
+    */
+
+        $(function(){
+            setInterval(() => {
+                clear();
+                update();
+            }, 10 * 1000);
+            function update() {
+                // $.getJSON("/rooms", function(result){
+                //     $('#rooms').html(JSON.stringify(result));
+                // });
+                $.getJSON("/rooms", function(result){
+                    // insert text into new div, append to room list
+                    $.each(result, function(){
+                        // $.each(this, function(){
+                            var room_name = this.room_name;
+                            var occupancy = this.occupancy;
+                            var timestamp = this.timestamp;
+                            var room_limit = this.room_limit;
+                            var temperature = this.temperature;
+                            var room_image = this.room_image;
+
+                            $('#room-list').append(
+                                '<div class="room">\r\n' + //
+                                    '<h1>' + room_name + '</h1>\r\n' //
+                                        + '<ul>\r\n' //
+                                            + '<li>Occupancy: ' + occupancy + '</li>\r\n' //
+                                            + '<li>Limit: ' + room_limit + '</li>\r\n' //
+                                            + '<li>Temperature: ' + temperature + '</li>\r\n' //
+                                            + '<li>Timestamp: ' + timestamp + '</li>\r\n' //
+                                        + '</ul>\r\n' //
+                                    + '<img src="' + room_image + '" alt="Room Image"></img>\r\n' //
+                                + '</div>'
+                            );
+                        });
+                    // });      
+                });
+            }
+            function clear() {
+                $('#room-list').empty();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1 id="page-heading">
+        Rowan IoT: Rowan Rooms
+    </h1>
+    <p id="sub-h1-par">
+        Welcome to the homepage for the Fall 2018 Rowan IoT <b>Rowan Rooms</b> project.
+    </p>
+    <hr/>
+    <h2 id="room-info">
+        Room Information
+    </h2>
+    <div id="room-list" class="flex-container">
+        <!-- Rooms automatically added here. -->
+    </div>
+    <p id="last-updated">
+        <i>Last updated</i> 
+        <!-- Time of last update -->
+    </p>
+    <noscript>
+        Your browser does not support JavaScript. Please update your browser or use a different one.
+    </noscript>
+</body>
+</html>

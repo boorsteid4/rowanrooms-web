@@ -1,0 +1,64 @@
+/* Stylesheet for index.html */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 25px;
+}
+
+@keyframes fade-in-zoom {
+    from {
+        opacity: 0;
+        max-width: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-width: 600px;
+        max-height: 400px;
+    }
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.room {
+    padding: 15px;
+    margin: 15px;
+    height: fit-content;
+    width: fit-content;
+    border: 3px;
+    display: inline-block;
+    border-style: outset;
+    border-top-color: lightgray;
+    border-bottom-color: gray;
+    box-shadow: 10px, black;
+
+    animation-name: fade-in-zoom;
+    animation-duration: 1.5s;
+    overflow: hidden;
+
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+}
+
+#page-heading {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#sub-h1-par {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#room-info {
+    font-family: Arial, Helvetica, sans-serif;
+}
