@@ -8,9 +8,9 @@ This is the web frontend for the RowanRooms project. It serves as a user interfa
 The easiest way to test this web page is to run it on a [Flask](flask.pocoo.org) server. 
 
 1. Begin by downloading the [python-docs-samples](https://github.com/GoogleCloudPlatform/python-docs-samples) repo, which contains numerous Python code samples for working with Google Cloud. 
-2. With a command prompt, navigate to the [../python-docs-samples/appengine/standard/flask/tutorial/](https://github.com/GoogleCloudPlatform/python-docs-samples/tree/master/appengine/standard/flask/tutorial) folder.
-3. Follow the steps [here](https://cloud.google.com/appengine/docs/standard/python/download) to download the Google Cloud SDK. This comes with a development server running the web frontend.
-4. Open app.yaml your IDE, text editor, etc. of choice and append the following code:
+2. Direct your browser and to the [python-docs-samples/appengine/standard/flask/tutorial/](https://github.com/GoogleCloudPlatform/python-docs-samples/tree/master/appengine/standard/flask/tutorial) folder. Follow the steps for installing dependencies.
+3. Follow the steps [here](https://cloud.google.com/appengine/docs/standard/python/download) to download the Google Cloud SDK. This comes with a development server for running the web frontend.
+4. Open app.yaml in your IDE, text editor, etc. of choice and append the following code:
 ```yaml
 runtime: python27
 api_version: 1
@@ -53,20 +53,20 @@ from flask import Flask, render_template, request
 def get_room_list():
     rooms = []
     # change the following code
-    rext338 = {"room_name": "REXT338", 
+    room1 = {"room_name": "Room 1", 
                "occupancy": 6, 
                "temperature": 24.5, 
-               "room_image": "dummy_url", 
+               "room_image": "dummy_url1", 
                "room_limit": 24, 
                "timestamp": time.asctime(time.localtime(time.time()))}
-    rooms.append(rext338)
-    rext339 = {"room_name": "REXT339", 
+    rooms.append(room1)
+    room2 = {"room_name": "Room 2", 
                "occupancy": 0, 
                "temperature": 23.1, 
                "room_image": "dummy_url2", 
                "room_limit": 24, 
                "timestamp": time.asctime(time.localtime(time.time()))}
-    rooms.append(rext339)
+    rooms.append(room2)
     # change the above code
     return rooms
 # [START create_app]
@@ -107,6 +107,7 @@ def server_error(e):
     return 'An internal error occurred.', 500
 # [END app]
 ```
+Much of the code is the same from the original main.py. The additional lines of code will create two JSON objects `room1` and `room2` for rooms.
 6. Put index.html inside "..\templates\" and stylesheet.css inside "..\static\"
 7. Set the FLASK_APP environment variable to main.py using `set FLASK_APP=main.py` in the command prompt.
 8. Run the flask app with `run flask` in the command prompt.
